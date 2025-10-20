@@ -1,10 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "./store/store.ts";
-import DynamicRoutes from "./router/DynamicRoutes.tsx";
-import Menu from "./components/Menu.tsx";
+import React from 'react';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './store/store.ts';
+import DynamicRoutes from './router/DynamicRoutes.tsx';
 
 function AppContent() {
   const location = useLocation();
