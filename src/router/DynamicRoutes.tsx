@@ -13,7 +13,7 @@ import IngredientList from '../modules/warehouse/pages/IngredientList.tsx';
 import CategoryList from '../modules/warehouse/pages/CategoryList.tsx';
 import CategoryDetail from '../modules/warehouse/pages/CategoryDetail.tsx';
 import ProductList from '../modules/warehouse/pages/ProductList.tsx';
-import ForgotPasswordPage from '../pages/ForgotPasswordPage.tsx';
+import ForgotPassword from '../pages/ForgotPassword.tsx';
 
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
@@ -40,7 +40,7 @@ const DynamicRoutes: React.FC = () => {
     return (
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     );

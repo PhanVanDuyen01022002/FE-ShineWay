@@ -2,7 +2,7 @@ import { Lock, Mail } from 'lucide-react';
 import LoginInput from './LoginInput.tsx';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setPermissions } from '../../store/authSlice.ts';
 import { fakePermissions } from '../../data/fakePermissions.ts';
 
@@ -51,9 +51,9 @@ function LoginForm() {
         />
 
         <div className="text-right">
-          <a href="#" className="text-sm font-medium text-sky-600 hover:underline">
+          <Link to="/forgot-password" className="text-sm font-medium text-sky-600 hover:underline">
             Quên mật khẩu ?
-          </a>
+          </Link>
         </div>
 
         <button

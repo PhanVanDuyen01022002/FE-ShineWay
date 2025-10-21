@@ -7,19 +7,20 @@ import VerificationCheckbox from '../components/forgot-password/VerificationChec
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../store/store.ts';
 import { setEmailForgot } from '../store/authSlice.ts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
 import OTPCountdown from '../components/forgot-password/OTPCountdown.tsx';
+import { ArrowLeft } from 'lucide-react';
 
-const ForgotPasswordPage = () => {
-  const { emailForgot } = useSelector((state: RootState) => state.auth);
-
+const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [message, setMessage] = useState('');
   const [otp, setOtp] = useState('');
 
+  const { emailForgot } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const handleSubmitForgot = (e: any) => {
     e.preventDefault();
@@ -29,14 +30,31 @@ const ForgotPasswordPage = () => {
     }
 
     dispatch(setEmailForgot(email));
+    localStorage.removeItem('otp_expiry');
   };
 
   const handleSubmitOtp = () => {};
+
+  const handleBackFromOTP = () => {
+    localStorage.removeItem('otp_expiry');
+    dispatch(setEmailForgot(null));
+  };
+
+  const handleBackToLogin = () => {
+    navigate('/login');
+  };
 
   return (
     <>
       {emailForgot ? (
         <AuthLayout>
+          <ArrowLeft
+            size={22}
+            absoluteStrokeWidth
+            className="absolute bottom-[102%] left-2 text-gray-400 hover:text-gray-700 cursor-pointer"
+            onClick={handleBackFromOTP}
+          />
+
           <FormHeader title="Quên mật khẩu">Vui lòng kiểm tra mã OTP được gửi đến email của bạn.</FormHeader>
 
           <form className="mt-10 w-full space-y-8" onSubmit={handleSubmitOtp}>
@@ -46,7 +64,7 @@ const ForgotPasswordPage = () => {
               <Link to="#" className="underline">
                 Chưa nhận mã?
               </Link>
-              <OTPCountdown duration={60} />
+              <OTPCountdown duration={10} refreshDuration={6} />
             </div>
 
             <SubmitButton disabled={!(otp.length === 6)}>Xác nhận</SubmitButton>
@@ -54,6 +72,12 @@ const ForgotPasswordPage = () => {
         </AuthLayout>
       ) : (
         <AuthLayout>
+          <ArrowLeft
+            size={22}
+            absoluteStrokeWidth
+            className="absolute bottom-[102%] left-2 text-gray-400 hover:text-gray-700 cursor-pointer"
+            onClick={handleBackToLogin}
+          />
           <FormHeader title="Quên mật khẩu">
             Vui lòng nhập Email được cấp trên nền tảng <span className="font-semibold text-sky-600">ShineWay</span>
           </FormHeader>
@@ -76,4 +100,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ForgotPassword;
