@@ -6,7 +6,6 @@ import Login from '../pages/Login.tsx';
 import EmployeeInfoPage from '../modules/employees/pages/EmployeeList.tsx';
 import PositionPage from '../modules/roles/pages/RoleList.tsx';
 import AppLayout from '../ui/AppLayout.tsx';
-import Menu from '../components/Menu.tsx';
 import Dashboard from '../pages/Dashboard.tsx';
 import EmployeeDetail from '../modules/employees/pages/EmployeeDetail.tsx';
 import IngredientList from '../modules/warehouse/pages/IngredientList.tsx';
@@ -14,6 +13,7 @@ import CategoryList from '../modules/warehouse/pages/CategoryList.tsx';
 import CategoryDetail from '../modules/warehouse/pages/CategoryDetail.tsx';
 import ProductList from '../modules/warehouse/pages/ProductList.tsx';
 import ForgotPassword from '../pages/ForgotPassword.tsx';
+import ResetPassword from '../pages/ResetPassword.tsx';
 
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
@@ -41,6 +41,7 @@ const DynamicRoutes: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     );

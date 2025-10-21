@@ -1,23 +1,18 @@
-import { Layout, Avatar, Dropdown, Badge, Button, Space } from "antd"; // Xóa Input, DownOutlined, SearchOutlined
-import {
-  BellOutlined,
-  QuestionCircleOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { useState } from "react";
-import Sidebar from "./Sidebar.tsx";
-import Menu from "../components/Menu.tsx"; // Import Menu chính từ code trước (menu top-level như "Nhân sự", "Kho")
-import { useDispatch } from "react-redux";
-import { logout } from "../store/authSlice.ts";
-import { persistor } from "../store/store.ts";
+import { Layout, Avatar, Dropdown, Badge, Button, Space } from 'antd'; // Xóa Input, DownOutlined, SearchOutlined
+import { BellOutlined, QuestionCircleOutlined, MenuOutlined } from '@ant-design/icons';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import Sidebar from './Sidebar.tsx';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/authSlice.ts';
+import { persistor } from '../store/store.ts';
 
 const { Header, Content, Sider } = Layout; // Thêm Sider
 
 const userMenuItems = [
-  { key: "profile", label: "Profile" },
-  { key: "settings", label: "Settings" },
-  { key: "logout", label: "Logout" },
+  { key: 'profile', label: 'Profile' },
+  { key: 'settings', label: 'Settings' },
+  { key: 'logout', label: 'Logout' },
 ];
 
 function AppLayout() {
@@ -26,15 +21,15 @@ function AppLayout() {
   const location = useLocation(); // Thêm để kiểm tra path
 
   const onUserClick = ({ key }: any) => {
-    if (key === "logout") {
+    if (key === 'logout') {
       dispatch(logout());
       persistor.purge();
     } else {
-      console.log("Chọn:", key);
+      console.log('Chọn:', key);
     }
   };
 
-  const isHome = location.pathname === "/"; // Kiểm tra nếu ở home
+  const isHome = location.pathname === '/'; // Kiểm tra nếu ở home
 
   return (
     <Layout className="min-h-screen">
@@ -42,9 +37,7 @@ function AppLayout() {
         <Space size="middle" className="flex items-center">
           <div className="flex items-center">
             <Link to="/">
-              <h1 className="text-4xl font-bold text-[#0088FF] mr-4">
-                ShineWay
-              </h1>
+              <h1 className="text-4xl font-bold text-[#0088FF] mr-4">ShineWay</h1>
             </Link>
           </div>
         </Space>
@@ -56,7 +49,7 @@ function AppLayout() {
               onClick: onUserClick,
             }}
             placement="bottomRight"
-            trigger={["click"]}
+            trigger={['click']}
           >
             <Space className="cursor-pointer">
               <Avatar size="large" className="bg-blue-500">
@@ -78,11 +71,7 @@ function AppLayout() {
             className="text-gray-700"
           />
           <Badge count={5} offset={[0, 10]} className="text-gray-700">
-            <Button
-              type="text"
-              icon={<BellOutlined className="text-lg" />}
-              size="large"
-            />
+            <Button type="text" icon={<BellOutlined className="text-lg" />} size="large" />
           </Badge>
           <Button
             type="text"
@@ -93,7 +82,7 @@ function AppLayout() {
           />
         </Space>
       </Header>
-      <Layout className="pt-[136px]">
+      <Layout className="pt-[136px] flex">
         {!isHome && ( // Chỉ render Sider khi KHÔNG ở home (fix duplicate)
           <Sider
             key="main-sider" // Thêm key unique để React re-render đúng
@@ -101,7 +90,7 @@ function AppLayout() {
             collapsed={collapsed}
             onCollapse={setCollapsed}
             width={306}
-            collapsedWidth={80}
+            collapsedWidth={0}
             className="h-[calc(100vh-136px)] bg-white fixed left-0 z-0"
             theme="light"
           >
@@ -109,8 +98,8 @@ function AppLayout() {
           </Sider>
         )}
         <Content
-          className={`overflow-y-auto p-6 bg-gray-50 h-[calc(100vh-136px)] ${
-            isHome ? "ml-0" : "ml-[80px] md:ml-[306px]"
+          className={`overflow-y-auto p-6 bg-gray-50 h-[calc(100vh-136px)] transition-all duration-200 ${
+            collapsed ? 'ml-0' : 'ml-[80px] md:ml-[306px]'
           }`}
         >
           <div className="max-w-7xl mx-auto">
