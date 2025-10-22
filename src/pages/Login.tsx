@@ -1,43 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setPermissions } from "../store/authSlice.ts";
-import { useNavigate } from "react-router-dom";
-import { fakePermissions } from "../data/fakePermissions.ts";
+import LoginForm from '../components/login/LoginForm.tsx';
+import LoginIntroduce from '../components/login/LoginIntroduce.tsx';
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const permissions = fakePermissions;
-      dispatch(setPermissions(permissions));
-      navigate("/");
-    } catch (error) {
-      console.error("Login failed", error);
-    }
-  };
-
+function Login() {
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-    </form>
+    <main className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+      <div className="w-full max-w-[1440px] grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-2xl bg-white shadow-xl py-[60px]">
+        <div className="hidden md:flex flex-col items-center justify-center bg-white text-center relative border-r">
+          <LoginIntroduce />
+        </div>
+
+        <div className="flex flex-col justify-center bg-white ">
+          <LoginForm />
+        </div>
+      </div>
+    </main>
   );
-};
+}
 
 export default Login;

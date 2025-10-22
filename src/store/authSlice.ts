@@ -1,17 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { UserPermissions } from "../types/index.ts";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { UserPermissions } from '../types/index.ts';
 
 export interface AuthState {
   permissions: UserPermissions | null;
+  emailForgot: string | null;
 }
 
 const initialState: AuthState = {
-  permissions: null, // Persist sẽ xử lý lưu trữ
+  permissions: null,
+  emailForgot: null,
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setPermissions: (state, action: PayloadAction<UserPermissions>) => {
@@ -20,8 +22,11 @@ const authSlice = createSlice({
     logout: (state) => {
       state.permissions = null;
     },
+    setEmailForgot: (state, action) => {
+      state.emailForgot = action.payload;
+    },
   },
 });
 
-export const { setPermissions, logout } = authSlice.actions;
+export const { setPermissions, logout, setEmailForgot } = authSlice.actions;
 export default authSlice.reducer;
