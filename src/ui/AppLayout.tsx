@@ -29,7 +29,7 @@ function AppLayout() {
     }
   };
 
-  const isHome = location.pathname === '/'; // Kiểm tra nếu ở home
+  const isHome = location.pathname === '/' || location.pathname === '/thuc-don'; // Kiểm tra nếu ở home
 
   return (
     <Layout className="min-h-screen">
@@ -99,7 +99,7 @@ function AppLayout() {
         )}
         <Content
           className={`overflow-y-auto p-6 bg-gray-50 h-[calc(100vh-136px)] transition-all duration-200 ${
-            collapsed ? 'ml-0' : 'ml-[80px] md:ml-[306px]'
+            !isHome && !collapsed ? 'ml-[80px] md:ml-[306px]' : 'ml-0'
           }`}
         >
           <div className="max-w-7xl mx-auto">

@@ -25,7 +25,7 @@ const Menu: React.FC = () => {
   // Map tên menu với icon tương ứng (bạn có thể chỉnh icon cho phù hợp)
   const iconMap: { [key: string]: React.ReactElement } = {
     'Doanh thu': <FaChartBar className="inline-block" />,
-    'Thống kê đơn': <FaClipboardList className="inline-block" />,
+    'Thực đơn': <FaClipboardList className="inline-block" />,
     'Hạ tầng': <FaServer className="inline-block" />,
     Lương: <FaMoneyCheck className="inline-block" />,
     Kho: <FaWarehouse className="inline-block" />,

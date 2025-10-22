@@ -15,3 +15,13 @@
   height: 97px;
   font-size: 34px;
 }
+
+/* Ẩn thanh scroll ngang và dọc */
+.scroll-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE và Edge */
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

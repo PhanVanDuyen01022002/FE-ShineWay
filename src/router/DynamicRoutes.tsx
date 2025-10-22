@@ -14,6 +14,7 @@ import CategoryDetail from '../modules/warehouse/pages/CategoryDetail.tsx';
 import ProductList from '../modules/warehouse/pages/ProductList.tsx';
 import ForgotPassword from '../pages/ForgotPassword.tsx';
 import ResetPassword from '../pages/ResetPassword.tsx';
+import OrderPage from '../modules/orders/pages/index.tsx';
 
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
@@ -58,19 +59,24 @@ const DynamicRoutes: React.FC = () => {
       <Route element={<AppLayout />}>
         {/* AppLayout bao bọc tất cả routes sau đăng nhập */}
         <Route path="/" element={<HomePage />} /> {/* Trang chủ chỉ có Header + Menu, không có sidebar */}
+        <Route path="/thuc-don" element={<OrderPage />} /> {/* Trang chủ chỉ có Header + Menu, không có sidebar */}
         {permissions.menus.map((menu) => (
           <Route key={menu.url} path={menu.url} element={<Navigate to={menu.subItems[0]?.url || '/'} replace />} />
         ))}
-        {permissions.menus.flatMap((menu) =>
-          menu.subItems.map((sub) => {
+        {permissions.menus.flatMap((menu) => {
+          console.log({ menu });
+
+          return menu.subItems.map((sub) => {
             const PageComponent = pageMap[sub.url];
+            console.log({ PageComponent });
+
             if (!PageComponent) {
               console.warn(`Không có component cho sub URL: ${sub.url}`); // Debug thiếu
               return null;
             }
             return <Route key={sub.url} path={sub.url} element={<PageComponent />} />;
-          }),
-        )}
+          });
+        })}
         {/* Route động chi tiết nhân viên: Chỉ render nếu có quyền xem */}
         {employeeSubItem?.permissions.view && (
           <Route path={`${employeeSubItem.url}/:employeeId`} element={<EmployeeDetail />} />
