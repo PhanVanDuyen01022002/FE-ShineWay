@@ -33,7 +33,8 @@ const ForgotPassword = () => {
     localStorage.removeItem('otp_expiry');
   };
 
-  const handleSubmitOtp = () => {
+  const handleSubmitOtp = (e: any) => {
+    e.preventDefault();
     navigate('/reset-password');
   };
 

@@ -10,6 +10,8 @@ function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log('123');
+
     e.preventDefault();
     if (password !== confirmPassword) messageApi.error('Mật khẩu không trùng khớp!', 3);
     else messageApi.success('Cập nhật thành công!');
